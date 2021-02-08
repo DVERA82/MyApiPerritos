@@ -1,16 +1,18 @@
+
 package com.example.myapiperritos.remote
 
-import com.example.myapiperritos.ImageRaza
+import com.example.myapiperritos.PerritosDataClass
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface ApiDog {
+interface InterfaceRaza {
 
-    @GET ("raza/list")
-    suspend fun fetchRazaList():Response<ApiDog>
+    @GET ("breeds/list")
+    suspend fun fetchRazaList():Response<PerritosDataClass>
 
-    @GET("raza/{raza}/images/")
+    @GET("breed/{raza}/images")
     suspend fun fetchImagesbyraza(@Path ("raza") raza: String) : Response<ImageRaza>
+
 }
 
