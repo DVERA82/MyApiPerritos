@@ -1,11 +1,14 @@
 package com.example.myapiperritos.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapiperritos.databinding.FragmentSecondBinding
 import com.example.myapiperritos.viewModel.ViewModelRaza
 
@@ -15,7 +18,7 @@ import com.example.myapiperritos.viewModel.ViewModelRaza
 class SecondFragment : Fragment() {
 
     private lateinit var binding : FragmentSecondBinding
-    private val ViewModelRaza : ViewModelRaza by activityViewModels()
+    private val ViewModel : ViewModelRaza by activityViewModels()
     var idImage: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +40,17 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var adapter = AdapterImage()
+        binding.rvImage.adapter= adapter
+        binding.rvImage.layoutManager= GridLayoutManager(context,1)
 
+
+        ViewModel.getRazaBD(idImage).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it?.let {
+                Log.d("LISTADO IMAGE",it.toString())
+                adapter.update(it)
+
+            }
+        })
     }
 
 }

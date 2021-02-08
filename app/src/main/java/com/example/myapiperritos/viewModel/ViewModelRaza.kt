@@ -27,12 +27,14 @@ class ViewModelRaza (application: Application)  : AndroidViewModel(application) 
         razaLiveDataFromDB = repository.LiveDataRazaDaoDB
     }
 
-    fun getfetchRazaWithCoroutines() = viewModelScope.launch {
-        repository.getRazaWithCoroutines()
+    fun getfetchRazaWithCoroutines(id: String) = viewModelScope.launch {
+        repository.imageRaza(id)
     }
+
 
     fun getRazaBD(id: String): LiveData<List<ImageRaza>>{
          return repository.getRazaBD(id)
     }
+
 
 }

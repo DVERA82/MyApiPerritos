@@ -8,31 +8,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapiperritos.pojo.Raza
 import com.example.myapiperritos.databinding.ItemImageBinding
+import com.example.myapiperritos.remote.ImageRaza
 
 class AdapterImage : RecyclerView.Adapter<AdapterImage.ImageVH>() {
 
-    private var listAdapterItem = listOf<Raza>()
+    private var listImageAdapterItem = listOf<ImageRaza>()
 
-    private val selectedImage = MutableLiveData<Raza>()
+    private val selectedImage = MutableLiveData<ImageRaza>()
     fun selectedItem() = selectedImage
 
-    fun update(list: List<Raza>) {
-        listAdapterItem = list
+    fun update(list: List<ImageRaza>) {
+        listImageAdapterItem = list
         notifyDataSetChanged()
     }
 
     inner class ImageVH(private val binding: ItemImageBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-        fun bind(raza: Raza) {
+        fun bind(raza: ImageRaza) {
             Glide.with(binding.textViewImage)
-                .load(raza.raza)
+                .load(raza.imgURL)
                 .into(binding.textViewImage)
 
             itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
-            selectedImage.value = listAdapterItem[adapterPosition]
+            selectedImage.value = listImageAdapterItem[adapterPosition]
         }
 
 
@@ -43,11 +44,11 @@ class AdapterImage : RecyclerView.Adapter<AdapterImage.ImageVH>() {
     }
 
     override fun onBindViewHolder(holder: ImageVH, position: Int) {
-       val perritosDataClass = listAdapterItem[position]
+       val perritosDataClass = listImageAdapterItem[position]
         holder.bind(perritosDataClass)
     }
 
-    override fun getItemCount(): Int= listAdapterItem.size
+    override fun getItemCount(): Int= listImageAdapterItem.size
 
 
 

@@ -1,6 +1,7 @@
 
 package com.example.myapiperritos.remote
 
+import com.example.myapiperritos.ImageDataClass
 import com.example.myapiperritos.PerritosDataClass
 import retrofit2.Response
 import retrofit2.http.GET
@@ -12,7 +13,7 @@ interface InterfaceRaza {
     suspend fun fetchRazaList():Response<PerritosDataClass>
 
     @GET("breed/{raza}/images")
-    suspend fun fetchImagesbyraza(@Path ("raza") raza: String) : Response<ImageRaza>
+    suspend fun fetchImagesbyraza(@Path ("raza") raza: String) : Response<ImageDataClass>
 
 }
 
