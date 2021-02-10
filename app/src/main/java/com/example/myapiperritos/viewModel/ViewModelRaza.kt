@@ -1,9 +1,11 @@
 package com.example.myapiperritos.viewModel
 
 import android.app.Application
+import android.provider.MediaStore
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import androidx.room.Update
 import com.example.myapiperritos.pojo.Raza
 import com.example.myapiperritos.remote.ImageRaza
 import com.example.myapiperritos.local.RazaDB
@@ -25,6 +27,13 @@ class ViewModelRaza (application: Application)  : AndroidViewModel(application) 
             repository.getRazaWithCoroutines()
         }
         razaLiveDataFromDB = repository.LiveDataRazaDaoDB
+    }
+
+    fun getAllFavList(): LiveData<List<ImageRaza>> = repository.listFavorityImages  // this return all
+    //fav from dataBase
+
+    fun updateFavorityImages(imageRaza: ImageRaza)= viewModelScope.launch {
+        repository.updateFavImages(imageRaza)
     }
 
     fun getfetchRazaWithCoroutines(id: String) = viewModelScope.launch {

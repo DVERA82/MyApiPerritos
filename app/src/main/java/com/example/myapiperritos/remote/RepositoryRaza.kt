@@ -1,5 +1,6 @@
 package com.example.myapiperritos.remote
 
+import android.provider.ContactsContract
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.myapiperritos.local.RazaDao
@@ -9,7 +10,7 @@ class RepositoryRaza (private val dao: RazaDao) {
 
     private val services = RetrofitClient.retrofitInstance()
     val LiveDataRazaDaoDB: LiveData<List<Raza>> = dao.getAllRazaDao()
-
+    val listFavorityImages = dao.getAllFavorityImages()
 
     fun converterRaza(converterRaza: List<String>): List<Raza> {
         val listRaza: MutableList<Raza> = mutableListOf()
@@ -73,7 +74,9 @@ class RepositoryRaza (private val dao: RazaDao) {
     fun getRazaBD(id: String): LiveData<List<ImageRaza>> {
         return dao.getAllImageRazaDao(id)
     }
-
+     suspend fun updateFavImages(imagesRaza: ImageRaza) { // esto va ser el update de fav
+         dao.updateImageRaza(imagesRaza)
+     }
 }
 
 
